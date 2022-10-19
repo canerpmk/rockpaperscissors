@@ -1,0 +1,74 @@
+import 'dart:io';
+import 'dart:math';
+
+enum situation { rock, paper, scissors }
+
+void main() {
+  while (true) {
+    var player = 0;
+    var pc = 0;
+    var exit;
+
+    print("Please enter the q value to exit the game");
+
+    while (player < 2 && pc < 2) {
+      print("Please enter one of the rock, paper, scissors values");
+      var u_move = stdin.readLineSync();
+      print("Your choice: $u_move");
+
+      if (u_move == "q") {
+        break;
+      }
+      if (u_move == "rock" || u_move == "paper" || u_move == "scissors") {
+        var pc_move = Random().nextInt(3);
+
+        if (pc_move == 0) {
+          pc_move == situation.rock;
+          print("PC choice: rock");
+        }
+        if (pc_move == 1) {
+          pc_move == situation.paper;
+          print("PC choice: paper");
+        }
+        if (pc_move == 2) {
+          pc_move == situation.scissors;
+          print("PC choice: scissors");
+        }
+
+        if ((pc_move == 0 && u_move == "paper") ||
+            (pc_move == 1 && u_move == "scissors") ||
+            (pc_move == 2 && u_move == "rock")) {
+          print("You Win");
+          player++;
+        } else if ((pc_move == 0 && u_move == "scissors") ||
+            (pc_move == 1 && u_move == "rock") ||
+            (pc_move == 2 && u_move == "paper")) {
+          print("You Lost");
+          pc++;
+        } else if ((pc_move == 0 && u_move == "rock") ||
+            (pc_move == 1 && u_move == "paper") ||
+            (pc_move == 2 && u_move == "scissors")) {
+          print("Draw");
+        }
+        print("Player: $player");
+        print("PC: $pc");
+      } else {
+        print("You entered the wrong value!");
+      }
+    }
+    print("Game Over");
+    if (player == 2) {
+      print("Congratulations you won :)");
+    } else if (pc == 2) {
+      print("PC won You lost :(");
+    }
+    print("Enter the r to continue the game, any key to exit");
+    exit = stdin.readLineSync();
+
+    if (exit == "r") {
+      continue;
+    } else {
+      break;
+    }
+  }
+}
